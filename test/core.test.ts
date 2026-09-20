@@ -1,0 +1,1 @@
+import{expect,it}from'vitest';import{PersistentMap}from'../src/index.js';it('persists',()=>{const a=new PersistentMap<number>();const b=a.set('x',1);expect(a.size()).toBe(0);expect(b.get('x')).toBe(1)});

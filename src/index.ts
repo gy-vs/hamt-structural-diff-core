@@ -1,0 +1,3 @@
+export type Entry<V>={key:string;value:V;hash:number};
+export class PersistentMap<V>{constructor(private readonly entries:Entry<V>[]=[]){ }get(key:string,hash=hashKey(key)){return this.entries.find(item=>item.hash===hash&&item.key===key)?.value}set(key:string,value:V,hash=hashKey(key)){return new PersistentMap([...this.entries.filter(item=>item.key!==key),{key,value,hash}])}delete(key:string){return new PersistentMap(this.entries.filter(item=>item.key!==key))}size(){return this.entries.length}items(){return this.entries.slice()}}
+export function hashKey(value:string){let hash=2166136261;for(const char of value)hash=Math.imul(hash^char.charCodeAt(0),16777619);return hash>>>0}
